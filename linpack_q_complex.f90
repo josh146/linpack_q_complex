@@ -1,4 +1,7 @@
 module linpack_q_complex
+  use kinds
+
+  implicit none
 
 contains
 
@@ -23,7 +26,7 @@ function iqamax ( n, x, incx )
 !  Reference:
 !
 !    Charles Lawson, Richard Hanson, David Kincaid, Fred Krogh,
-!    Algorithm 539:
+!    Algorithm 539: 
 !    Basic Linear Algebra Subprograms for Fortran Usage,
 !    ACM Transactions on Mathematical Software,
 !    Volume 5, Number 3, September 1979, pages 308-323.
@@ -47,15 +50,15 @@ function iqamax ( n, x, incx )
 !
   implicit none
 
-  integer, parameter :: qp = selected_real_kind ( 20, 199 )
+!  integer, parameter :: qp = selected_real_kind ( 20, 199 )
 
   integer ( kind = 4 ) i
   integer ( kind = 4 ) incx
   integer ( kind = 4 ) iqamax
   integer ( kind = 4 ) ix
   integer ( kind = 4 ) n
-  real ( kind = qp ) samax
-  real ( kind = qp ) x(*)
+  real ( kind = wp ) samax
+  real ( kind = wp ) x(*)
 
   if ( n <= 0 ) then
 
@@ -105,6 +108,7 @@ function iqamax ( n, x, incx )
   return
 end
 subroutine qaxpy ( n, sa, x, incx, y, incy )
+  use kinds
 
 !*****************************************************************************80
 !
@@ -125,7 +129,7 @@ subroutine qaxpy ( n, sa, x, incx, y, incy )
 !  Reference:
 !
 !    Charles Lawson, Richard Hanson, David Kincaid, Fred Krogh,
-!    Algorithm 539:
+!    Algorithm 539: 
 !    Basic Linear Algebra Subprograms for Fortran Usage,
 !    ACM Transactions on Mathematical Software,
 !    Volume 5, Number 3, September 1979, pages 308-323.
@@ -146,14 +150,14 @@ subroutine qaxpy ( n, sa, x, incx, y, incy )
 !
 !    Input, integer ( kind = 4 ) INCX, the increment between successive entries of X.
 !
-!    Input/output, real ( kind = qp ) Y(*), the vector to which a
+!    Input/output, real ( kind = qp ) Y(*), the vector to which a 
 !    multiple of X is to be added.
 !
 !    Input, integer ( kind = 4 ) INCY, the increment between successive entries of Y.
 !
   implicit none
 
-  integer, parameter :: qp = selected_real_kind ( 20, 199 )
+!  integer, parameter :: qp = selected_real_kind ( 20, 199 )
 
   integer ( kind = 4 ) i
   integer ( kind = 4 ) incx
@@ -161,9 +165,9 @@ subroutine qaxpy ( n, sa, x, incx, y, incy )
   integer ( kind = 4 ) ix
   integer ( kind = 4 ) iy
   integer ( kind = 4 ) n
-  real ( kind = qp ) sa
-  real ( kind = qp ) x(*)
-  real ( kind = qp ) y(*)
+  real ( kind = wp ) sa
+  real ( kind = wp ) x(*)
+  real ( kind = wp ) y(*)
 
   if ( n <= 0 ) then
 
@@ -198,6 +202,7 @@ subroutine qaxpy ( n, sa, x, incx, y, incy )
   return
 end
 subroutine qgeco ( a, lda, n, ipvt, rcond, z )
+  use kinds
 
 !*****************************************************************************80
 !
@@ -266,27 +271,27 @@ subroutine qgeco ( a, lda, n, ipvt, rcond, z )
 !
   implicit none
 
-  integer, parameter :: qp = selected_real_kind ( 20, 199 )
+!  integer, parameter :: qp = selected_real_kind ( 20, 199 )
 
   integer ( kind = 4 ) lda
   integer ( kind = 4 ) n
 
-  real ( kind = qp ) a(lda,n)
-  real ( kind = qp ) anorm
-  real ( kind = qp ) ek
+  real ( kind = wp ) a(lda,n)
+  real ( kind = wp ) anorm
+  real ( kind = wp ) ek
   integer ( kind = 4 ) info
   integer ( kind = 4 ) ipvt(n)
   integer ( kind = 4 ) j
   integer ( kind = 4 ) k
   integer ( kind = 4 ) l
-  real ( kind = qp ) rcond
-  real ( kind = qp ) s
-  real ( kind = qp ) sm
-  real ( kind = qp ) t
-  real ( kind = qp ) wk
-  real ( kind = qp ) wkm
-  real ( kind = qp ) ynorm
-  real ( kind = qp ) z(n)
+  real ( kind = wp ) rcond
+  real ( kind = wp ) s
+  real ( kind = wp ) sm
+  real ( kind = wp ) t
+  real ( kind = wp ) wk
+  real ( kind = wp ) wkm
+  real ( kind = wp ) ynorm
+  real ( kind = wp ) z(n)
 !
 !  Compute the L1 norm of A.
 !
@@ -444,6 +449,7 @@ subroutine qgeco ( a, lda, n, ipvt, rcond, z )
   return
 end
 subroutine qgedi ( a, lda, n, ipvt, det, work, job )
+  use kinds
 
 !*****************************************************************************80
 !
@@ -502,21 +508,21 @@ subroutine qgedi ( a, lda, n, ipvt, det, work, job )
 !
   implicit none
 
-  integer, parameter :: qp = selected_real_kind ( 20, 199 )
+!  integer, parameter :: qp = selected_real_kind ( 20, 199 )
 
   integer ( kind = 4 ) lda
   integer ( kind = 4 ) n
 
-  real ( kind = qp ) a(lda,n)
-  real ( kind = qp ) det(2)
+  real ( kind = wp ) a(lda,n)
+  real ( kind = wp ) det(2)
   integer ( kind = 4 ) i
   integer ( kind = 4 ) ipvt(n)
   integer ( kind = 4 ) j
   integer ( kind = 4 ) job
   integer ( kind = 4 ) k
   integer ( kind = 4 ) l
-  real ( kind = qp ) t
-  real ( kind = qp ) work(n)
+  real ( kind = wp ) t
+  real ( kind = wp ) work(n)
 !
 !  Compute the determinant.
 !
@@ -594,6 +600,7 @@ subroutine qgedi ( a, lda, n, ipvt, det, work, job )
   return
 end
 subroutine qgefa ( a, lda, n, ipvt, info )
+  use kinds
 
 !*****************************************************************************80
 !
@@ -641,19 +648,19 @@ subroutine qgefa ( a, lda, n, ipvt, info )
 !
   implicit none
 
-  integer, parameter :: qp = selected_real_kind ( 20, 199 )
+!  integer, parameter :: qp = selected_real_kind ( 20, 199 )
 
   integer ( kind = 4 ) lda
   integer ( kind = 4 ) n
 
-  real ( kind = qp ) a(lda,n)
+  real ( kind = wp ) a(lda,n)
   integer ( kind = 4 ) info
   integer ( kind = 4 ) ipvt(n)
   !integer ( kind = 4 ) iqamax
   integer ( kind = 4 ) j
   integer ( kind = 4 ) k
   integer ( kind = 4 ) l
-  real ( kind = qp ) t
+  real ( kind = wp ) t
 !
 !  Gaussian elimination with partial pivoting.
 !
@@ -707,6 +714,7 @@ subroutine qgefa ( a, lda, n, ipvt, info )
   return
 end
 subroutine qgesl ( a, lda, n, ipvt, b, job )
+  use kinds
 
 !*****************************************************************************80
 !
@@ -722,7 +730,7 @@ subroutine qgesl ( a, lda, n, ipvt, b, job )
 !    zero on the diagonal.  Technically this indicates singularity
 !    but it is often caused by improper arguments or improper
 !    setting of LDA.  It will not occur if the subroutines are
-!    called correctly and if QGECO has set 0.0 < RCOND
+!    called correctly and if QGECO has set 0.0 < RCOND 
 !    or QGEFA has set INFO == 0.
 !
 !  Licensing:
@@ -765,18 +773,18 @@ subroutine qgesl ( a, lda, n, ipvt, b, job )
 !
   implicit none
 
-  integer, parameter :: qp = selected_real_kind ( 20, 199 )
+!  integer, parameter :: qp = selected_real_kind ( 20, 199 )
 
   integer ( kind = 4 ) lda
   integer ( kind = 4 ) n
 
-  real ( kind = qp ) a(lda,n)
-  real ( kind = qp ) b(n)
+  real ( kind = wp ) a(lda,n)
+  real ( kind = wp ) b(n)
   integer ( kind = 4 ) ipvt(n)
   integer ( kind = 4 ) job
   integer ( kind = 4 ) k
   integer ( kind = 4 ) l
-  real ( kind = qp ) t
+  real ( kind = wp ) t
 !
 !  Solve A * X = B.
 !
@@ -829,6 +837,7 @@ subroutine qgesl ( a, lda, n, ipvt, b, job )
   return
 end
 subroutine qscal ( n, sa, x, incx )
+  use kinds
 
 !*****************************************************************************80
 !
@@ -836,7 +845,7 @@ subroutine qscal ( n, sa, x, incx )
 !
 !  Licensing:
 !
-!    This code is distributed under the GNU LGPL license.
+!    This code is distributed under the GNU LGPL license. 
 !
 !  Modified:
 !
@@ -844,7 +853,7 @@ subroutine qscal ( n, sa, x, incx )
 !
 !  Author:
 !
-!    Original FORTRAN77 version by Charles Lawson, Richard Hanson,
+!    Original FORTRAN77 version by Charles Lawson, Richard Hanson, 
 !    David Kincaid, Fred Krogh.
 !    FORTRAN90 version by John Burkardt.
 !
@@ -857,7 +866,7 @@ subroutine qscal ( n, sa, x, incx )
 !    LC: QA214.L56.
 !
 !    Charles Lawson, Richard Hanson, David Kincaid, Fred Krogh,
-!    Algorithm 539,
+!    Algorithm 539, 
 !    Basic Linear Algebra Subprograms for Fortran Usage,
 !    ACM Transactions on Mathematical Software,
 !    Volume 5, Number 3, September 1979, pages 308-323.
@@ -870,20 +879,20 @@ subroutine qscal ( n, sa, x, incx )
 !
 !    Input/output, real ( kind = qp ) X(*), the vector to be scaled.
 !
-!    Input, integer ( kind = 4 ) INCX, the increment between successive
+!    Input, integer ( kind = 4 ) INCX, the increment between successive 
 !    entries of X.
 !
   implicit none
 
-  integer, parameter :: qp = selected_real_kind ( 20, 199 )
+!  integer, parameter :: qp = selected_real_kind ( 20, 199 )
 
   integer ( kind = 4 ) i
   integer ( kind = 4 ) incx
   integer ( kind = 4 ) ix
   integer ( kind = 4 ) m
   integer ( kind = 4 ) n
-  real ( kind = qp ) sa
-  real ( kind = qp ) x(*)
+  real ( kind = wp ) sa
+  real ( kind = wp ) x(*)
 
   if ( n <= 0 ) then
 
@@ -919,6 +928,7 @@ subroutine qscal ( n, sa, x, incx )
   return
 end
 subroutine qswap ( n, x, incx, y, incy )
+  use kinds
 
 !*****************************************************************************80
 !
@@ -926,7 +936,7 @@ subroutine qswap ( n, x, incx, y, incy )
 !
 !  Licensing:
 !
-!    This code is distributed under the GNU LGPL license.
+!    This code is distributed under the GNU LGPL license. 
 !
 !  Modified:
 !
@@ -945,9 +955,9 @@ subroutine qswap ( n, x, incx, y, incy )
 !    LC: QA214.L56.
 !
 !    Charles Lawson, Richard Hanson, David Kincaid, Fred Krogh,
-!    Algorithm 539,
+!    Algorithm 539, 
 !    Basic Linear Algebra Subprograms for Fortran Usage,
-!    ACM Transactions on Mathematical Software,
+!    ACM Transactions on Mathematical Software, 
 !    Volume 5, Number 3, September 1979, pages 308-323.
 !
 !  Parameters:
@@ -956,17 +966,17 @@ subroutine qswap ( n, x, incx, y, incy )
 !
 !    Input/output, real ( kind = qp ) X(*), one of the vectors to swap.
 !
-!    Input, integer ( kind = 4 ) INCX, the increment between successive
+!    Input, integer ( kind = 4 ) INCX, the increment between successive 
 !    entries of X.
 !
 !    Input/output, real ( kind = qp ) Y(*), one of the vectors to swap.
 !
-!    Input, integer ( kind = 4 ) INCY, the increment between successive
+!    Input, integer ( kind = 4 ) INCY, the increment between successive 
 !    elements of Y.
 !
   implicit none
 
-  integer, parameter :: qp = selected_real_kind ( 20, 199 )
+!  integer, parameter :: qp = selected_real_kind ( 20, 199 )
 
   integer ( kind = 4 ) i
   integer ( kind = 4 ) incx
@@ -975,9 +985,9 @@ subroutine qswap ( n, x, incx, y, incy )
   integer ( kind = 4 ) iy
   integer ( kind = 4 ) m
   integer ( kind = 4 ) n
-  real ( kind = qp ) temp
-  real ( kind = qp ) x(*)
-  real ( kind = qp ) y(*)
+  real ( kind = wp ) temp
+  real ( kind = wp ) x(*)
+  real ( kind = wp ) y(*)
 
   if ( n <= 0 ) then
 
@@ -1056,7 +1066,7 @@ function iqamax_complex ( n, x, incx )
 !  Reference:
 !
 !    Charles Lawson, Richard Hanson, David Kincaid, Fred Krogh,
-!    Algorithm 539:
+!    Algorithm 539: 
 !    Basic Linear Algebra Subprograms for Fortran Usage,
 !    ACM Transactions on Mathematical Software,
 !    Volume 5, Number 3, September 1979, pages 308-323.
@@ -1080,15 +1090,15 @@ function iqamax_complex ( n, x, incx )
 !
   implicit none
 
-  integer, parameter :: qp = selected_real_kind ( 20, 199 )
+!  integer, parameter :: qp = selected_real_kind ( 20, 199 )
 
   integer ( kind = 4 ) i
   integer ( kind = 4 ) incx
   integer ( kind = 4 ) iqamax_complex
   integer ( kind = 4 ) ix
   integer ( kind = 4 ) n
-  real ( kind = qp ) samax
-  complex ( kind = qp ) x(*)
+  real ( kind = wp ) samax
+  complex ( kind = wp ) x(*)
 
   if ( n <= 0 ) then
 
@@ -1138,6 +1148,7 @@ function iqamax_complex ( n, x, incx )
   return
 end
 subroutine qaxpy_complex ( n, sa, x, incx, y, incy )
+  use kinds
 
 !*****************************************************************************80
 !
@@ -1158,7 +1169,7 @@ subroutine qaxpy_complex ( n, sa, x, incx, y, incy )
 !  Reference:
 !
 !    Charles Lawson, Richard Hanson, David Kincaid, Fred Krogh,
-!    Algorithm 539:
+!    Algorithm 539: 
 !    Basic Linear Algebra Subprograms for Fortran Usage,
 !    ACM Transactions on Mathematical Software,
 !    Volume 5, Number 3, September 1979, pages 308-323.
@@ -1179,14 +1190,14 @@ subroutine qaxpy_complex ( n, sa, x, incx, y, incy )
 !
 !    Input, integer ( kind = 4 ) INCX, the increment between successive entries of X.
 !
-!    Input/output, real ( kind = qp ) Y(*), the vector to which a
+!    Input/output, real ( kind = qp ) Y(*), the vector to which a 
 !    multiple of X is to be added.
 !
 !    Input, integer ( kind = 4 ) INCY, the increment between successive entries of Y.
 !
   implicit none
 
-  integer, parameter :: qp = selected_real_kind ( 20, 199 )
+!  integer, parameter :: qp = selected_real_kind ( 20, 199 )
 
   integer ( kind = 4 ) i
   integer ( kind = 4 ) incx
@@ -1194,9 +1205,9 @@ subroutine qaxpy_complex ( n, sa, x, incx, y, incy )
   integer ( kind = 4 ) ix
   integer ( kind = 4 ) iy
   integer ( kind = 4 ) n
-  complex ( kind = qp ) sa
-  complex ( kind = qp ) x(*)
-  complex ( kind = qp ) y(*)
+  complex ( kind = wp ) sa
+  complex ( kind = wp ) x(*)
+  complex ( kind = wp ) y(*)
 
   if ( n <= 0 ) then
 
@@ -1231,6 +1242,7 @@ subroutine qaxpy_complex ( n, sa, x, incx, y, incy )
   return
 end
 subroutine qgedi_complex ( a, lda, n, ipvt, det, work, job )
+  use kinds
 
 !*****************************************************************************80
 !
@@ -1289,21 +1301,21 @@ subroutine qgedi_complex ( a, lda, n, ipvt, det, work, job )
 !
   implicit none
 
-  integer, parameter :: qp = selected_real_kind ( 20, 199 )
+!  integer, parameter :: qp = selected_real_kind ( 20, 199 )
 
   integer ( kind = 4 ) lda
   integer ( kind = 4 ) n
 
-  complex ( kind = qp ) a(lda,n)
-  complex ( kind = qp ) det(2)
+  complex ( kind = wp ) a(lda,n)
+  complex ( kind = wp ) det(2)
   integer ( kind = 4 ) i
   integer ( kind = 4 ) ipvt(n)
   integer ( kind = 4 ) j
   integer ( kind = 4 ) job
   integer ( kind = 4 ) k
   integer ( kind = 4 ) l
-  complex ( kind = qp ) t
-  complex ( kind = qp ) work(n)
+  complex ( kind = wp ) t
+  complex ( kind = wp ) work(n)
 !
 !  Compute the determinant.
 !
@@ -1381,6 +1393,7 @@ subroutine qgedi_complex ( a, lda, n, ipvt, det, work, job )
   return
 end
 subroutine qgefa_complex ( a, lda, n, ipvt, info )
+  use kinds
 
 !*****************************************************************************80
 !
@@ -1428,19 +1441,19 @@ subroutine qgefa_complex ( a, lda, n, ipvt, info )
 !
   implicit none
 
-  integer, parameter :: qp = selected_real_kind ( 20, 199 )
+!  integer, parameter :: qp = selected_real_kind ( 20, 199 )
 
   integer ( kind = 4 ) lda
   integer ( kind = 4 ) n
 
-  complex ( kind = qp ) a(lda,n)
+  complex ( kind = wp ) a(lda,n)
   integer ( kind = 4 ) info
   integer ( kind = 4 ) ipvt(n)
   !integer ( kind = 4 ) iqamax
   integer ( kind = 4 ) j
   integer ( kind = 4 ) k
   integer ( kind = 4 ) l
-  complex ( kind = qp ) t
+  complex ( kind = wp ) t
 !
 !  Gaussian elimination with partial pivoting.
 !
@@ -1494,6 +1507,7 @@ subroutine qgefa_complex ( a, lda, n, ipvt, info )
   return
 end
 subroutine qscal_complex ( n, sa, x, incx )
+  use kinds
 
 !*****************************************************************************80
 !
@@ -1501,7 +1515,7 @@ subroutine qscal_complex ( n, sa, x, incx )
 !
 !  Licensing:
 !
-!    This code is distributed under the GNU LGPL license.
+!    This code is distributed under the GNU LGPL license. 
 !
 !  Modified:
 !
@@ -1509,7 +1523,7 @@ subroutine qscal_complex ( n, sa, x, incx )
 !
 !  Author:
 !
-!    Original FORTRAN77 version by Charles Lawson, Richard Hanson,
+!    Original FORTRAN77 version by Charles Lawson, Richard Hanson, 
 !    David Kincaid, Fred Krogh.
 !    FORTRAN90 version by John Burkardt.
 !
@@ -1522,7 +1536,7 @@ subroutine qscal_complex ( n, sa, x, incx )
 !    LC: QA214.L56.
 !
 !    Charles Lawson, Richard Hanson, David Kincaid, Fred Krogh,
-!    Algorithm 539,
+!    Algorithm 539, 
 !    Basic Linear Algebra Subprograms for Fortran Usage,
 !    ACM Transactions on Mathematical Software,
 !    Volume 5, Number 3, September 1979, pages 308-323.
@@ -1535,20 +1549,20 @@ subroutine qscal_complex ( n, sa, x, incx )
 !
 !    Input/output, real ( kind = qp ) X(*), the vector to be scaled.
 !
-!    Input, integer ( kind = 4 ) INCX, the increment between successive
+!    Input, integer ( kind = 4 ) INCX, the increment between successive 
 !    entries of X.
 !
   implicit none
 
-  integer, parameter :: qp = selected_real_kind ( 20, 199 )
+!  integer, parameter :: qp = selected_real_kind ( 20, 199 )
 
   integer ( kind = 4 ) i
   integer ( kind = 4 ) incx
   integer ( kind = 4 ) ix
   integer ( kind = 4 ) m
   integer ( kind = 4 ) n
-  complex ( kind = qp ) sa
-  complex ( kind = qp ) x(*)
+  complex ( kind = wp ) sa
+  complex ( kind = wp ) x(*)
 
   if ( n <= 0 ) then
 
@@ -1584,6 +1598,7 @@ subroutine qscal_complex ( n, sa, x, incx )
   return
 end
 subroutine qswap_complex ( n, x, incx, y, incy )
+  use kinds
 
 !*****************************************************************************80
 !
@@ -1591,7 +1606,7 @@ subroutine qswap_complex ( n, x, incx, y, incy )
 !
 !  Licensing:
 !
-!    This code is distributed under the GNU LGPL license.
+!    This code is distributed under the GNU LGPL license. 
 !
 !  Modified:
 !
@@ -1610,9 +1625,9 @@ subroutine qswap_complex ( n, x, incx, y, incy )
 !    LC: QA214.L56.
 !
 !    Charles Lawson, Richard Hanson, David Kincaid, Fred Krogh,
-!    Algorithm 539,
+!    Algorithm 539, 
 !    Basic Linear Algebra Subprograms for Fortran Usage,
-!    ACM Transactions on Mathematical Software,
+!    ACM Transactions on Mathematical Software, 
 !    Volume 5, Number 3, September 1979, pages 308-323.
 !
 !  Parameters:
@@ -1621,17 +1636,17 @@ subroutine qswap_complex ( n, x, incx, y, incy )
 !
 !    Input/output, real ( kind = qp ) X(*), one of the vectors to swap.
 !
-!    Input, integer ( kind = 4 ) INCX, the increment between successive
+!    Input, integer ( kind = 4 ) INCX, the increment between successive 
 !    entries of X.
 !
 !    Input/output, real ( kind = qp ) Y(*), one of the vectors to swap.
 !
-!    Input, integer ( kind = 4 ) INCY, the increment between successive
+!    Input, integer ( kind = 4 ) INCY, the increment between successive 
 !    elements of Y.
 !
   implicit none
 
-  integer, parameter :: qp = selected_real_kind ( 20, 199 )
+!  integer, parameter :: qp = selected_real_kind ( 20, 199 )
 
   integer ( kind = 4 ) i
   integer ( kind = 4 ) incx
@@ -1640,9 +1655,9 @@ subroutine qswap_complex ( n, x, incx, y, incy )
   integer ( kind = 4 ) iy
   integer ( kind = 4 ) m
   integer ( kind = 4 ) n
-  complex ( kind = qp ) temp
-  complex ( kind = qp ) x(*)
-  complex ( kind = qp ) y(*)
+  complex ( kind = wp ) temp
+  complex ( kind = wp ) x(*)
+  complex ( kind = wp ) y(*)
 
   if ( n <= 0 ) then
 
